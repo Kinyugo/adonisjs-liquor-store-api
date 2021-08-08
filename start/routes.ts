@@ -20,6 +20,9 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/', async () => {
-  return { hello: 'world' }
+Route.group(() => {
+  Route.resource('brands', 'BrandsController').apiOnly()
 })
+  .prefix('api/v1')
+  .as('api.v1')
+  .middleware(['parseQueryString'])

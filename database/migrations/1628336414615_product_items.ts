@@ -6,7 +6,7 @@ export default class ProductItems extends BaseSchema {
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.integer('product_id').unsigned().references('products.id')
+      table.integer('product_id').unsigned().references('products.id').onDelete('CASCADE')
       table.string('stock_keeping_unit').unique().notNullable()
       table.decimal('maximum_retail_price').unsigned().notNullable()
       table.decimal('price').unsigned().notNullable()

@@ -27,6 +27,7 @@ export default class Category extends BaseModel {
 
   @hasMany(() => Category, {
     foreignKey: 'parentId',
+    serializeAs: 'sub_categories',
   })
   public subCategories: HasMany<typeof Category>
 }

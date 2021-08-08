@@ -38,6 +38,11 @@ export default class ProductItem extends BaseModel {
     return this.quantity - (this.defective + this.sold)
   }
 
+  @computed()
+  public get discount() {
+    return this.maximumRetailPrice - this.price
+  }
+
   @belongsTo(() => Product)
   public product: BelongsTo<typeof Product>
 }

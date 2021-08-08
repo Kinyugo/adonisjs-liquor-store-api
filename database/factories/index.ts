@@ -32,8 +32,8 @@ export const ProductFactory = Factory.define(Product, ({ faker }) => ({
 }))
   .relation('brand', () => BrandFactory)
   .relation('categories', () => CategoryFactory)
-  .relation('images', () => ProductImageFactory)
-  .relation('items', () => ProductItemFactory)
+  .relation('productImages', () => ProductImageFactory)
+  .relation('productItems', () => ProductItemFactory)
   .build()
 
 export const ProductItemFactory = Factory.define(ProductItem, ({ faker }) => ({

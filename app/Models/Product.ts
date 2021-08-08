@@ -1,6 +1,8 @@
 import { DateTime } from 'luxon'
 import {
   BaseModel,
+  beforeFetch,
+  beforeFind,
   BelongsTo,
   belongsTo,
   column,
@@ -8,6 +10,7 @@ import {
   hasMany,
   ManyToMany,
   manyToMany,
+  ModelQueryBuilderContract,
 } from '@ioc:Adonis/Lucid/Orm'
 import ProductImage from './ProductImage'
 import Brand from './Brand'
@@ -39,12 +42,22 @@ export default class Product extends BaseModel {
   @belongsTo(() => Brand)
   public brand: BelongsTo<typeof Brand>
 
-  @hasMany(() => ProductImage)
-  public images: HasMany<typeof ProductImage>
+  @hasMany(() => ProductImage, { serializeAs: 'product_items' })
+  public productImages: HasMany<typeof ProductImage>
 
   @manyToMany(() => Category)
   public categories: ManyToMany<typeof Category>
 
-  @hasMany(() => ProductItem)
-  public items: HasMany<typeof ProductItem>
+  @hasMany(() => ProductItem, { serializeAs: 'product_items' })
+  public productItems: HasMany<typeof ProductItem>
+
+  @beforeFetch()
+  @beforeFind()
+  public static fetchCategories(query: ModelQueryBuilderContract<typeof Product>) {
+    query.preload('categories', (categoryQuery) => {
+      categoryQuery
+        .preload('subCategories', (subCategoryQuery) => subCategoryQuery.select('title', 'slug'))
+        .select('title', 'slug')
+    })
+  }
 }
