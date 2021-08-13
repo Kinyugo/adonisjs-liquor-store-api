@@ -50,7 +50,7 @@ export default class BrandsController {
       manufacturer_name: schema.string.optional({ trim: true }),
     })
     const payload = await request.validate({ schema: updateSchema })
-    console.log({ payload, body: request.body() })
+
     return await brand.merge(payload).save()
   }
 

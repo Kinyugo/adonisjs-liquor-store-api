@@ -41,5 +41,9 @@ export default class CreateBrandValidator {
    * }
    *
    */
-  public messages = {}
+  public messages = {
+    'name.required': 'Name is required',
+    'country_of_origin.required': 'Country of origin is required',
+    'manufacturer_name.required': 'Manufacturer name is required',
+  }
 }
