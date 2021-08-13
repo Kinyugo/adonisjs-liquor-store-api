@@ -1,12 +1,16 @@
 type Order = 'asc' | 'desc' | undefined
-type SortingParam = { column: string; order: 'asc' | 'desc' | undefined }
+type PaginationParams = { page: number; perPage: number }
+type SortingParams = { column: string; order: 'asc' | 'desc' | undefined }[]
+type FieldsParams = string[]
+type AttachParams = string[]
+type SearchParams = string[][]
 
 declare module '@ioc:Adonis/Core/HttpContext' {
   interface HttpContextContract {
-    paginationParams: { page: number; perPage: number } | null
-    sortingParams: SortingParam[] | null
-    fieldsParams: string[] | []
-    attachParams: string[] | null
-    searchParams: string[][] | null
+    paginationParams: PaginationParams | null
+    sortingParams: SortingParams | null
+    fieldsParams: FieldsParams | []
+    attachParams: AttachParams | null
+    searchParams: SearchParams | null
   }
 }

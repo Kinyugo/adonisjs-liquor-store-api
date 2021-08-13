@@ -9,7 +9,6 @@ export default class ParseQueryString {
     this.parseAttachQuery(ctx)
     this.parseSearchQuery(ctx)
 
-    console.log(ctx)
     await next()
   }
 
